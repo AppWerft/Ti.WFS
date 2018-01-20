@@ -93,3 +93,267 @@ And you will get:
     }  
 }      
 ```
+### Other methods
+
+### getCapabilities()
+ 	Generates a metadata document describing a WFS service provided by server as well as valid WFS operations and parameters
+### describeFeatureType()
+Returns a description of feature types supported by a WFS service
+
+```
+var Wfs = require("ti.wfs");
+Wfs.setEndpoint("https://geodienste.hamburg.de/HH_WFS_Strassenbaumkataster");
+Wfs.setVersion("2.0.0");
+Wfs.describeFeatureType()
+```
+Gives you:
+```
+{
+  "schema": {
+    "-xmlns": "http://www.w3.org/2001/XMLSchema",
+    "-xmlns:gml": "http://www.opengis.net/gml/3.2",
+    "-xmlns:app": "http://www.deegree.org/app",
+    "-xmlns:xlink": "http://www.w3.org/1999/xlink",
+    "-targetNamespace": "http://www.deegree.org/app",
+    "-elementFormDefault": "qualified",
+    "-attributeFormDefault": "unqualified",
+    "import": {
+      "-namespace": "http://www.opengis.net/gml/3.2",
+      "-schemaLocation": "http://schemas.opengis.net/gml/3.2.1/gml.xsd"
+    },
+    "element": [
+      {
+        "-name": "strassenbaumkataster",
+        "-substitutionGroup": "gml:AbstractFeature",
+        "complexType": {
+          "complexContent": {
+            "extension": {
+              "-base": "gml:AbstractFeatureType",
+              "sequence": {
+                "element": [
+                  {
+                    "-name": "baumid",
+                    "-minOccurs": "0",
+                    "-type": "integer"
+                  },
+                  {
+                    "-name": "gattung",
+                    "-minOccurs": "0",
+                    "-type": "string"
+                  },
+                  {
+                    "-name": "gattung_latein",
+                    "-minOccurs": "0",
+                    "-type": "string"
+                  },
+                  {
+                    "-name": "gattung_deutsch",
+                    "-minOccurs": "0",
+                    "-type": "string"
+                  },
+                  {
+                    "-name": "art",
+                    "-minOccurs": "0",
+                    "-type": "string"
+                  },
+                  {
+                    "-name": "art_latein",
+                    "-minOccurs": "0",
+                    "-type": "string"
+                  },
+                  {
+                    "-name": "art_deutsch",
+                    "-minOccurs": "0",
+                    "-type": "string"
+                  },
+                  {
+                    "-name": "sorte",
+                    "-minOccurs": "0",
+                    "-type": "string"
+                  },
+                  {
+                    "-name": "sorte_latein",
+                    "-minOccurs": "0",
+                    "-type": "string"
+                  },
+                  {
+                    "-name": "sorte_deutsch",
+                    "-minOccurs": "0",
+                    "-type": "string"
+                  },
+                  {
+                    "-name": "pflanzjahr",
+                    "-minOccurs": "0",
+                    "-type": "integer"
+                  },
+                  {
+                    "-name": "kronendurchmesser",
+                    "-minOccurs": "0",
+                    "-type": "integer"
+                  },
+                  {
+                    "-name": "kronendmzahl",
+                    "-minOccurs": "0",
+                    "-type": "string"
+                  },
+                  {
+                    "-name": "stammumfang",
+                    "-minOccurs": "0",
+                    "-type": "integer"
+                  },
+                  {
+                    "-name": "stammumfangzahl",
+                    "-minOccurs": "0",
+                    "-type": "string"
+                  },
+                  {
+                    "-name": "strasse",
+                    "-minOccurs": "0",
+                    "-type": "string"
+                  },
+                  {
+                    "-name": "hausnummer",
+                    "-minOccurs": "0",
+                    "-type": "string"
+                  },
+                  {
+                    "-name": "stand_bearbeitung",
+                    "-minOccurs": "0",
+                    "-type": "date"
+                  },
+                  {
+                    "-name": "bezirk",
+                    "-minOccurs": "0",
+                    "-type": "string"
+                  },
+                  {
+                    "-name": "geom",
+                    "-minOccurs": "0",
+                    "-type": "gml:PointPropertyType"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      {
+        "-name": "strassenbaumkataster_hpa",
+        "-substitutionGroup": "gml:AbstractFeature",
+        "complexType": {
+          "complexContent": {
+            "extension": {
+              "-base": "gml:AbstractFeatureType",
+              "sequence": {
+                "element": [
+                  {
+                    "-name": "baumid",
+                    "-minOccurs": "0",
+                    "-type": "integer"
+                  },
+                  {
+                    "-name": "gattung",
+                    "-minOccurs": "0",
+                    "-type": "string"
+                  },
+                  {
+                    "-name": "gattung_latein",
+                    "-minOccurs": "0",
+                    "-type": "string"
+                  },
+                  {
+                    "-name": "gattung_deutsch",
+                    "-minOccurs": "0",
+                    "-type": "string"
+                  },
+                  {
+                    "-name": "art",
+                    "-minOccurs": "0",
+                    "-type": "string"
+                  },
+                  {
+                    "-name": "art_latein",
+                    "-minOccurs": "0",
+                    "-type": "string"
+                  },
+                  {
+                    "-name": "art_deutsch",
+                    "-minOccurs": "0",
+                    "-type": "string"
+                  },
+                  {
+                    "-name": "sorte",
+                    "-minOccurs": "0",
+                    "-type": "string"
+                  },
+                  {
+                    "-name": "sorte_latein",
+                    "-minOccurs": "0",
+                    "-type": "string"
+                  },
+                  {
+                    "-name": "sorte_deutsch",
+                    "-minOccurs": "0",
+                    "-type": "string"
+                  },
+                  {
+                    "-name": "pflanzjahr",
+                    "-minOccurs": "0",
+                    "-type": "integer"
+                  },
+                  {
+                    "-name": "kronendurchmesser",
+                    "-minOccurs": "0",
+                    "-type": "integer"
+                  },
+                  {
+                    "-name": "kronendmzahl",
+                    "-minOccurs": "0",
+                    "-type": "string"
+                  },
+                  {
+                    "-name": "stammumfang",
+                    "-minOccurs": "0",
+                    "-type": "integer"
+                  },
+                  {
+                    "-name": "stammumfangzahl",
+                    "-minOccurs": "0",
+                    "-type": "string"
+                  },
+                  {
+                    "-name": "strasse",
+                    "-minOccurs": "0",
+                    "-type": "string"
+                  },
+                  {
+                    "-name": "hausnummer",
+                    "-minOccurs": "0",
+                    "-type": "string"
+                  },
+                  {
+                    "-name": "stand_bearbeitung",
+                    "-minOccurs": "0",
+                    "-type": "date"
+                  },
+                  {
+                    "-name": "zustaendig",
+                    "-minOccurs": "0",
+                    "-type": "string"
+                  },
+                  {
+                    "-name": "geom",
+                    "-minOccurs": "0",
+                    "-type": "gml:PointPropertyType"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}
+```
+
