@@ -9,7 +9,6 @@ With this module you can use WFS services.
 ```
 var Wfs = require("ti.wfs").createWFS("https://geodienste.hamburg.de/HH_WFS_Strassenbaumkataster","2.0.0");
 
-
 Wfs.requestFeature({
    region : {
    	     latitude: 53.53,
@@ -360,4 +359,23 @@ Gives you:
   }
 }
 ```
+## Other WFS server
 
+Using of [google search](https://www.google.de/search?num=40&client=firefox-b-ab&dcr=0&ei=4I1jWsulNZHXwALmzaywBA&q=inurl%3A%22REQUEST%3DGetFeature%22&oq=inurl%3A%22REQUEST%3DGetFeature%22&gs_l=psy-ab.3...2965.2965.0.3350.1.1.0.0.0.0.0.0..0.0....0...1c..64.psy-ab..1.0.0....0.dB9xZtrbEJ8) you can find a lot of servers:
+
+- [GEOLOGICAL SURVEY
+OF DENMARK AND GREENLAND ](http://data.geus.dk/geusmap/ows/4258.jsp)
+- [	Marine.Daten.Infrastruktur.Niedersachsen](http://mdi.niedersachsen.de/geoserver/MSRL-D5-Eutrophierung/wfs)
+- [WFPGeoNode](https://geonode.wfp.org/geoserver/wfs)
+- [GeoNetwork opensource page](http://w3.fylde.gov.uk/geoserver/inspire/ows)
+- [Louisiana Govenor's Office of Homeland Security and Emergency Preparedness](http://gocop.gohsep.la.gov/geoserver/wfs)
+- [Hamburger MeldeMichel](https://geodienste.hamburg.de/HH_WFS_MML_extern)
+- [Hamburger KehrWiederBecher](https://geodienste.hamburg.de/HH_WFS_KehrwiederBecher)
+- [Hamburger Grünflächen](https://geodienste.hamburg.de/HH_WFS_KehrwiederBecher)
+- [Hamburger Kitas](https://geodienste.hamburg.de/HH_WFS_KitaEinrichtung)
+- [Deutscher Wetterdienst](https://maps.dwd.de/geoserver/dwd/ows)
+- [Deutsche Putenzüchter (Bundesministerium für Ernährung und Landwirtschaft)](https://gdi-services.bmel.de/cgi-bin/gefluegel_2013)
+- [Wasserpegelstände (Wasserstraßen- und Schifffahrtsverwaltung des Bundes)](http://www.pegelonline.wsv.de/webservices/gis/aktuell/wfs)
+- [Haltestellen Informationssystem (ZVBN)](http://daten.zvbn.de/geoserver/zvbn/ows)
+- [Hamburger Krankenhäuser](geodienste-hamburg.de/HH_WFS_Krankenhaeuser)
+- [Wiener Kunstwerke](https://data.wien.gv.at/daten/geo)

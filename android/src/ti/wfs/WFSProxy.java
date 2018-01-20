@@ -81,7 +81,8 @@ public class WFSProxy extends KrollProxy {
 	}
 
 	@Kroll.method
-	public void getFeature(KrollDict props) {
+	public void getFeature(KrollDict props, KrollFunction callback) {
+		onLoadCallback = callback;
 		String typeNames = props.getString("typeNames");
 		KrollDict region = new KrollDict(props.getKrollDict("region"));
 		double latitude = region.getDouble(TiC.PROPERTY_LATITUDE);
@@ -92,14 +93,32 @@ public class WFSProxy extends KrollProxy {
 				+ String.valueOf(longitude - longitudeDelta / 2) + ","
 				+ String.valueOf(latitude + latitudeDelta / 2) + ","
 				+ String.valueOf(longitude + longitudeDelta / 2) + ","+"urn:x-ogc:def:crs:EPSG:4326";
-		String url = this.wfs + "?REQUEST=GetFeature&sSERVICE=wfs&CRS=EPSG%3A4326&BBOX="+ 
+		String url = this.wfs + "?SRSName=urn:x-ogc:def:crs:EPSG%3A4326&REQUEST=GetFeature&SERVICE=wfs&CRS=EPSG%3A4326&BBOX="+ 
 				BBOX + "&VERSION="+this.version + "&TYPENAMES="+ typeNames.replace(":","%3A");
 		if (this.wfs != null) {
 			AsyncHttpClient client = new AsyncHttpClient();
 			client.get(ctx, url, new XMLResponseHandler());
 		}
 	}
-
+	
+	@Kroll.method
+	public void getCapabilities(KrollFunction callback) {
+		onLoadCallback = callback;
+		String url = this.wfs + "?REQUEST=GetCapabilities&SERVICE=wfs&VERSION="+this.version;
+		if (this.wfs != null) {
+			AsyncHttpClient client = new AsyncHttpClient();
+			client.get(ctx, url, new XMLResponseHandler());
+		}
+	}
+	@Kroll.method
+	public void describeFeatureType(KrollFunction callback) {
+		onLoadCallback = callback;
+		String url = this.wfs + "?REQUEST=DescribeFeatureType&SERVICE=wfs&VERSION="+this.version;
+		if (this.wfs != null) {
+			AsyncHttpClient client = new AsyncHttpClient();
+			client.get(ctx, url, new XMLResponseHandler());
+		}
+	}
 	private final class XMLResponseHandler extends AsyncHttpResponseHandler {
 		@Override
 		public void onFailure(int status, Header[] header, byte[] response,
@@ -129,7 +148,7 @@ public class WFSProxy extends KrollProxy {
 			xmllength = response.length;
 			transferTime = System.currentTimeMillis() - startTime;
 			startTime = System.currentTimeMillis();
-			JSONObject json = de.appwerft.remotexml.JSON
+			JSONObject json = ti.wfs.JSON
 					.toJSON(org.json.jsonjava.XML.toJSONObject(xml));
 			try {
 				buildPayload(json);
