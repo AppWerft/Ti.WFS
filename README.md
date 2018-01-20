@@ -7,11 +7,16 @@ With this module you can use WFS services.
 ### Usage
 
 ```
-var Wfs = require("ti.wfs");
-Wfs.setEndpoint("https://geodienste.hamburg.de/HH_WFS_Strassenbaumkataster");
-Wfs.setVersion("2.0.0");
+var Wfs = require("ti.wfs").createWFS("https://geodienste.hamburg.de/HH_WFS_Strassenbaumkataster","2.0.0");
+
+
 Wfs.requestFeature({
-   region : region,
+   region : {
+   	     latitude: 53.53,
+   	     longitude: 10.0,
+   	     latitudeDelta : 0.05,
+   	     longitudeDelta: 0.05
+   },
    typeNames : "app:Strassenbaumkataster"
 },onload: function(e){
   console.log(e.data)
@@ -102,12 +107,10 @@ And you will get:
 Returns a description of feature types supported by a WFS service
 
 ```
-var Wfs = require("ti.wfs");
-Wfs.setEndpoint("https://geodienste.hamburg.de/HH_WFS_Strassenbaumkataster");
-Wfs.setVersion("2.0.0");
 Wfs.describeFeatureType()
 ```
 Gives you:
+
 ```
 {
   "schema": {
