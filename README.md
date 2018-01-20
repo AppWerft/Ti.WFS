@@ -100,11 +100,12 @@ And you will get:
 Wfs.requestFeature(xml, function(e){
   console.log(e.data)
 );
-    
 ```
+
 ### Filtering etc.
 If you want filter the request you have to use XML. In this case the first parameter is a xml string:
-````
+
+```
 var xml = "<?xml version='1.0' encoding='UTF-8'?>
 <wfs:GetFeature service="WFS" version="1.1.0" resultType="hits" xmlns:app="http://www.deegree.org/app" xmlns:wfs="http://www.opengis.net/wfs" xmlns:gml="http://www.opengis.net/gml" xmlns:ogc="http://www.opengis.net/ogc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wfs http://schemas.opengis.net/wfs/1.1.0/wfs.xsd">
     <wfs:Query typeName="app:strassenbaumkataster">
@@ -120,19 +121,7 @@ var xml = "<?xml version='1.0' encoding='UTF-8'?>
                 </ogc:PropertyIsGreaterThanOrEqualTo>
                 <ogc:PropertyIsLessThan>
                     <ogc:PropertyName>app:pflanzjahr</ogc:PropertyName>
-                    <ogc:Literal>2017</ogc:Literal>
-                </ogc:PropertyIsLessThan>
-                <ogc:PropertyIsGreaterThanOrEqualTo>
-                    <ogc:PropertyName>app:kronendurchmesser</ogc:PropertyName>
-                    <ogc:Literal>0</ogc:Literal>
-                </ogc:PropertyIsGreaterThanOrEqualTo>
-                <ogc:PropertyIsLessThan>
-                    <ogc:PropertyName>app:kronendurchmesser</ogc:PropertyName>
-                    <ogc:Literal>51</ogc:Literal>
-                </ogc:PropertyIsLessThan>
-                <ogc:PropertyIsGreaterThanOrEqualTo>
-                    <ogc:PropertyName>app:stammumfang</ogc:PropertyName>
-                    <ogc:Literal>0</ogc:Literal>
+                                       <ogc:Literal>0</ogc:Literal>
                 </ogc:PropertyIsGreaterThanOrEqualTo>
                 <ogc:PropertyIsLessThan>
                     <ogc:PropertyName>app:stammumfang</ogc:PropertyName>
@@ -142,6 +131,12 @@ var xml = "<?xml version='1.0' encoding='UTF-8'?>
         </ogc:Filter>
     </wfs:Query>
 </wfs:GetFeature>";
+
+Wfs.requestFeature(xml, function(e){
+		 console.log(e.data)
+);
+
+
 ```
 
 ## Other methods
