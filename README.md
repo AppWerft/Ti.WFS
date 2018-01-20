@@ -1,6 +1,7 @@
 # Ti.WFS
 Client for  Web Feature Service (Open Geospatial) for Axway Titanium
 
+<img src="http://www.opengeospatial.org/pub/www/files/OGC_Logo_2D_Blue_x_0_0.png" width=300 />
 With this module you can use WFS services.
 
 ### Usage
