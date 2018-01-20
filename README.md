@@ -4,7 +4,7 @@ Client for  Web Feature Service (Open Geospatial) for Axway Titanium
 <img src="http://www.opengeospatial.org/pub/www/files/OGC_Logo_2D_Blue_x_0_0.png" width=300 />
 With this module you can use WFS services.
 
-### Usage
+## Usage
 
 ```
 var Wfs = require("ti.wfs").createWFS("https://geodienste.hamburg.de/HH_WFS_Strassenbaumkataster","2.0.0");
@@ -17,9 +17,9 @@ Wfs.requestFeature({
    	     longitudeDelta: 0.05
    },
    typeNames : "app:Strassenbaumkataster"
-},onload: function(e){
-  console.log(e.data)
-});
+}, function(e){
+		 console.log(e.data)
+);
 ```
 
 And you will get:
@@ -96,9 +96,55 @@ And you will get:
         }
       }]
     }  
-}      
+}  
+Wfs.requestFeature(xml, function(e){
+  console.log(e.data)
+);
+    
 ```
-### Other methods
+### Filtering etc.
+If you want filter the request you have to use XML. In this case the first parameter is a xml string:
+````
+var xml = "<?xml version='1.0' encoding='UTF-8'?>
+<wfs:GetFeature service="WFS" version="1.1.0" resultType="hits" xmlns:app="http://www.deegree.org/app" xmlns:wfs="http://www.opengis.net/wfs" xmlns:gml="http://www.opengis.net/gml" xmlns:ogc="http://www.opengis.net/ogc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wfs http://schemas.opengis.net/wfs/1.1.0/wfs.xsd">
+    <wfs:Query typeName="app:strassenbaumkataster">
+        <ogc:Filter>
+            <ogc:And>
+                <ogc:PropertyIsEqualTo>
+                    <ogc:PropertyName>app:gattung</ogc:PropertyName>
+                    <ogc:Literal>Taxus / Eibe</ogc:Literal>
+                </ogc:PropertyIsEqualTo>
+                <ogc:PropertyIsGreaterThanOrEqualTo>
+                    <ogc:PropertyName>app:pflanzjahr</ogc:PropertyName>
+                    <ogc:Literal>1920</ogc:Literal>
+                </ogc:PropertyIsGreaterThanOrEqualTo>
+                <ogc:PropertyIsLessThan>
+                    <ogc:PropertyName>app:pflanzjahr</ogc:PropertyName>
+                    <ogc:Literal>2017</ogc:Literal>
+                </ogc:PropertyIsLessThan>
+                <ogc:PropertyIsGreaterThanOrEqualTo>
+                    <ogc:PropertyName>app:kronendurchmesser</ogc:PropertyName>
+                    <ogc:Literal>0</ogc:Literal>
+                </ogc:PropertyIsGreaterThanOrEqualTo>
+                <ogc:PropertyIsLessThan>
+                    <ogc:PropertyName>app:kronendurchmesser</ogc:PropertyName>
+                    <ogc:Literal>51</ogc:Literal>
+                </ogc:PropertyIsLessThan>
+                <ogc:PropertyIsGreaterThanOrEqualTo>
+                    <ogc:PropertyName>app:stammumfang</ogc:PropertyName>
+                    <ogc:Literal>0</ogc:Literal>
+                </ogc:PropertyIsGreaterThanOrEqualTo>
+                <ogc:PropertyIsLessThan>
+                    <ogc:PropertyName>app:stammumfang</ogc:PropertyName>
+                    <ogc:Literal>1001</ogc:Literal>
+                </ogc:PropertyIsLessThan>
+            </ogc:And>
+        </ogc:Filter>
+    </wfs:Query>
+</wfs:GetFeature>";
+```
+
+## Other methods
 
 ### getCapabilities()
  	Generates a metadata document describing a WFS service provided by server as well as valid WFS operations and parameters
@@ -379,3 +425,5 @@ OF DENMARK AND GREENLAND ](http://data.geus.dk/geusmap/ows/4258.jsp)
 - [Haltestellen Informationssystem (ZVBN)](http://daten.zvbn.de/geoserver/zvbn/ows)
 - [Hamburger Krankenhäuser](geodienste-hamburg.de/HH_WFS_Krankenhaeuser)
 - [Wiener Kunstwerke](https://data.wien.gv.at/daten/geo)
+- [Forstwirtschaft Rettungspunkte des Saarlands](http://geoportal.saarland.de/ArcGIS/services/Internet/Forstwirtschaft/MapServer/WFSServer)
+- [Forstwirtschaft Rettungspunkte Sachsen-Anhalt](http://www.gfds.sachsen-anhalt.de/ows/ger/ws/wfs/a7d428d7-220b-9ed8/GDI-LSA_LZW/ows.wfs)
