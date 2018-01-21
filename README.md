@@ -9,7 +9,7 @@ With this module you can use WFS services.
 ```
 var Wfs = require("ti.wfs").createWFS("https://geodienste.hamburg.de/HH_WFS_Strassenbaumkataster","2.0.0");
 
-Wfs.requestFeature({
+Wfs.getFeature({
    region : {
    	     latitude: 53.53,
    	     longitude: 10.0,
@@ -19,7 +19,7 @@ Wfs.requestFeature({
    typeNames : "app:Strassenbaumkataster"
 }, function(e){
 		 console.log(e.data)
-);
+});
 ```
 
 And you will get:
@@ -67,7 +67,7 @@ And you will get:
       }]
     }  
 }  
-Wfs.requestFeature(xml, function(e){
+Wfs.getFeature(xml, function(e){
   console.log(e.data)
 );
 ```
@@ -244,7 +244,3 @@ OF DENMARK AND GREENLAND ](http://data.geus.dk/geusmap/ows/4258.jsp?service=wfs&
 - [Wasserpegelstände (Wasserstraßen- und Schifffahrtsverwaltung des Bundes)](http://www.pegelonline.wsv.de/webservices/gis/aktuell/wfsservice=wfs&version=1.1.0&request=GetCapabilities)
 - [Haltestellen Informationssystem (ZVBN)](http://daten.zvbn.de/geoserver/zvbn/ows?service=WFS&version=1.1.0&request=GetCapabilities)
 - [Hamburger Krankenhäuser](https://geodienste-hamburg.de/HH_WFS_Krankenhaeuser?service=WFS&version=1.1.0&request=GetCapabilities)
- 
-| Server        | GetCapabilities           | RequestFeature  |
-| ------------- |-------------| -----|
-| GEOLOGICAL SURVEY OF DENMARK AND GREENLAND      | [Capabilities](http://data.geus.dk/geusmap/ows/4258.jsp?service=wfs&version=1.1.0&request=GetCapabilities) | [RequestFeature](http://data.geus.dk/geusmap/ows/4258.jsp?service=wfs&version=1.1.0&request=RequestFeature) |

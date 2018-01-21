@@ -19,7 +19,7 @@ import org.appcelerator.kroll.common.TiConfig;
 public class WfsModule extends KrollModule {
 
 	// Standard Debugging variables
-	private static final String LCAT = "WfsModule";
+	private static final String LCAT = "*****WfsModule";
 
 	public WfsModule() {
 		super();
@@ -27,6 +27,7 @@ public class WfsModule extends KrollModule {
 
 	@Kroll.onAppCreate
 	public static void onAppCreate(TiApplication app) {
+		Log.d(LCAT,"module Wfs imported");
 	}
 
 	

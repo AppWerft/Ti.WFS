@@ -72,55 +72,61 @@ public class WFSProxy extends KrollProxy {
 			final URI uri;
 			try {
 				uri = new URI((String) props[0]);
-				this.wfs = uri.toString();
-				this.version = (String) props[1];
+				wfs = uri.toString();
+				version = (String) props[1];
+				Log.d(LCAT,wfs + " v"+version);
 			} catch (URISyntaxException e) {
 				e.printStackTrace();
 			}
-		}
+		} else Log.d(LCAT,"createWFS needs two paramters: endpoint and version!");
 
 	}
 
 	@Kroll.method
 	public void getFeature(Object _props, KrollFunction _callback) {
+		Log.d(LCAT,"start getFeature " + _props.toString());
 		KrollDict props = null;
+		onLoadCallback = _callback;
 		if (_props instanceof String) {
-			String xml = (String)_props;
+			String xml = (String) _props;
 			if (wfs != null) {
 				AsyncHttpClient client = new AsyncHttpClient();
 				HttpEntity entity;
-			    try {
-			        entity = new StringEntity(xml, "UTF-8");
-			    } catch (IllegalArgumentException e) {
-			        Log.d("HTTP", "StringEntity: IllegalArgumentException");
-			        return;
-			    } 
-			    String  contentType = "string/xml;UTF-8";
-				client.post(ctx, wfs,entity, contentType,
+				try {
+					entity = new StringEntity(xml, "UTF-8");
+				} catch (IllegalArgumentException e) {
+					Log.d("HTTP", "StringEntity: IllegalArgumentException");
+					return;
+				}
+				String contentType = "string/xml;UTF-8";
+				client.post(ctx, wfs, entity, contentType,
 						new XMLResponseHandler());
 			}
 		} else {
-			props = (KrollDict) _props;
-		}
-		onLoadCallback = _callback;
-		String typeNames = props.getString("typeNames");
-		KrollDict region = new KrollDict(props.getKrollDict("region"));
-		double latitude = region.getDouble(TiC.PROPERTY_LATITUDE);
-		double longitude = region.getDouble(TiC.PROPERTY_LONGITUDE);
-		double latitudeDelta = region.getDouble(TiC.PROPERTY_LATITUDE_DELTA);
-		double longitudeDelta = region.getDouble(TiC.PROPERTY_LONGITUDE_DELTA);
-		String BBOX = String.valueOf(latitude - latitudeDelta / 2) + ","
-				+ String.valueOf(longitude - longitudeDelta / 2) + ","
-				+ String.valueOf(latitude + latitudeDelta / 2) + ","
-				+ String.valueOf(longitude + longitudeDelta / 2) + ","
-				+ "urn:x-ogc:def:crs:EPSG:4326";
-		String url = this.wfs
-				+ "?SRSName=urn:x-ogc:def:crs:EPSG%3A4326&REQUEST=GetFeature&SERVICE=wfs&CRS=EPSG%3A4326&BBOX="
-				+ BBOX + "&VERSION=" + this.version + "&TYPENAMES="
-				+ typeNames.replace(":", "%3A");
-		if (this.wfs != null) {
-			AsyncHttpClient client = new AsyncHttpClient();
-			client.get(ctx, url, new XMLResponseHandler());
+			Log.d(LCAT,"Paramter was JS-Object");
+			props = new KrollDict((HashMap) _props);
+			String typeNames = props.getString("typeNames");
+			KrollDict region = new KrollDict(props.getKrollDict("region"));
+			double latitude = region.getDouble(TiC.PROPERTY_LATITUDE);
+			double longitude = region.getDouble(TiC.PROPERTY_LONGITUDE);
+			double latitudeDelta = region
+					.getDouble(TiC.PROPERTY_LATITUDE_DELTA);
+			double longitudeDelta = region
+					.getDouble(TiC.PROPERTY_LONGITUDE_DELTA);
+			String BBOX = String.valueOf(latitude - latitudeDelta / 2) + ","
+					+ String.valueOf(longitude - longitudeDelta / 2) + ","
+					+ String.valueOf(latitude + latitudeDelta / 2) + ","
+					+ String.valueOf(longitude + longitudeDelta / 2) + ","
+					+ "urn:x-ogc:def:crs:EPSG:4326";
+			String url = this.wfs
+					+ "?SRSName=urn:x-ogc:def:crs:EPSG%3A4326&REQUEST=GetFeature&SERVICE=wfs&CRS=EPSG%3A4326&BBOX="
+					+ BBOX + "&VERSION=" + this.version + "&TYPENAMES="
+					+ typeNames.replace(":", "%3A");
+			Log.d(LCAT,url);
+			if (this.wfs != null) {
+				AsyncHttpClient client = new AsyncHttpClient();
+				client.get(ctx, url, new XMLResponseHandler());
+			}
 		}
 	}
 
