@@ -23,6 +23,7 @@ Wfs.requestFeature({
 ```
 
 And you will get:
+
 ```
 {
   "wfs:FeatureCollection": {
@@ -60,37 +61,6 @@ And you will get:
               "-gml:id": "APP_STRASSENBAUMKATASTER_2299_APP_GEOM",
               "-srsName": "EPSG:25832",
               "gml:pos": "566545.620 5930635.407"
-            }
-          }
-        }
-      },
-      {
-        "app:strassenbaumkataster": {
-          "-xmlns:app": "http://www.deegree.org/app",
-          "-gml:id": "APP_STRASSENBAUMKATASTER_6388",
-          "app:baumid": "100076257",
-          "app:gattung": "Acer / Ahorn",
-          "app:gattung_latein": "Acer",
-          "app:gattung_deutsch": "Ahorn",
-          "app:art": "Acer platanoides / Spitz-Ahorn",
-          "app:art_latein": "Acer platanoides",
-          "app:art_deutsch": "Spitz-Ahorn",
-          "app:sorte_latein": "Acer platanoides",
-          "app:sorte_deutsch": "Spitz-Ahorn",
-          "app:pflanzjahr": "1982",
-          "app:kronendurchmesser": "9",
-          "app:kronendmzahl": "9 m",
-          "app:stammumfang": "113",
-          "app:stammumfangzahl": "113 cm",
-          "app:strasse": "Harburger Chaussee",
-          "app:hausnummer": "123",
-          "app:stand_bearbeitung": "2017-01-01",
-          "app:bezirk": "Hamburg-Mitte",
-          "app:geom": {
-            "gml:Point": {
-              "-gml:id": "APP_STRASSENBAUMKATASTER_6388_APP_GEOM",
-              "-srsName": "EPSG:25832",
-              "gml:pos": "566535.123 5930620.113"
             }
           }
         }
